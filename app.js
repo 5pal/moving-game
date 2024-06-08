@@ -15,7 +15,6 @@ class App {
         window.addEventListener("resize", this.resize.bind(this), false);
         this.resize();
         this.move();
-
         this.distance = 3;
 
         // window.requestAnimationFrame(this.move.bind(this));
@@ -24,6 +23,10 @@ class App {
             console.log(e.code);
             if (e.code === "Digit1") {
                 this.moveLeft();
+            }
+
+            if (e.code === "Digit2") {
+                this.moveRight();
             }
         });
     }
@@ -38,10 +41,6 @@ class App {
     }
 
     move() {
-        // window.requestAnimationFrame(this.move.bind(this));
-        // 생성하기 전에 이전 프레임을 제거
-        // this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
-
         this.ctx.fillStyle = "cornflowerblue";
         this.ctx.beginPath();
         this.ctx.arc(
@@ -56,7 +55,23 @@ class App {
 
     moveLeft() {
         this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
-        this.distance = this.distance + 20;
+        this.distance += 20;
+
+        this.ctx.fillStyle = "cornflowerblue";
+        this.ctx.beginPath();
+        this.ctx.arc(
+            (this.stageWidth - 50 - this.distance) / 2,
+            (this.stageHeight - 50 - this.distance) / 2,
+            30,
+            Math.PI * 2,
+            false,
+        );
+        this.ctx.fill();
+    }
+
+    moveRight() {
+        this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
+        this.distance -= 20;
 
         this.ctx.fillStyle = "cornflowerblue";
         this.ctx.beginPath();
